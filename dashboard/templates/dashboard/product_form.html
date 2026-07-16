@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head><title>Product Form</title></head>
+<body>
+    <h1>{% if object %}Edit{% else %}Add{% endif %} Product</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+    <a href="{% url 'dashboard:product_list' %}">Back to My Products</a>
+</body>
+</html>

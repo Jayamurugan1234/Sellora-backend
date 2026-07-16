@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head><title>My Products</title></head>
+<body>
+    <h1>My Products</h1>
+    <a href="{% url 'dashboard:product_add' %}">+ Add New Product</a>
+
+    {% if products %}
+    <table border="1" cellpadding="8">
+        <tr><th>Name</th><th>Category</th><th>Price</th><th>Stock</th><th>Approved</th><th>Actions</th></tr>
+        {% for p in products %}
+        <tr>
+            <td>{{ p.name }}</td>
+            <td>{{ p.category }}</td>
+            <td>₹{{ p.price }}</td>
+            <td>{{ p.stock }}</td>
+            <td>{{ p.is_approved }}</td>
+            <td>
+                <a href="{% url 'dashboard:product_edit' p.id %}">Edit</a> |
+                <a href="{% url 'dashboard:product_delete' p.id %}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <p>You haven't added any products yet.</p>
+    {% endif %}
+
+    <br>
+    <a href="{% url 'dashboard:owner_orders' %}">View Orders Containing My Products</a>
+</body>
+</html>

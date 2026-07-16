@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head><title>Your Cart</title></head>
+<body>
+    <h1>Your Cart</h1>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color: green;">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    {% if items %}
+        <table border="1" cellpadding="8">
+            <tr>
+                <th>Product</th><th>Price</th><th>Quantity</th><th>Subtotal</th><th>Action</th>
+            </tr>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.product.name }}</td>
+                <td>₹{{ item.product.price }}</td>
+                <td>
+                    <form method="post" action="{% url 'cart:update_quantity' item.id %}" style="display:inline;">
+                        {% csrf_token %}
+                        <input type="number" name="quantity" value="{{ item.quantity }}" min="0" style="width:50px;">
+                        <button type="submit">Update</button>
+                    </form>
+                </td>
+                <td>₹{{ item.subtotal }}</td>
+                <td>
+                    <a href="{% url 'cart:remove_from_cart' item.id %}">Remove</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <h3>Total: ₹{{ cart.total_price }}</h3>
+        <form method="post" action="{% url 'orders:checkout' %}">
+    {% csrf_token %}
+    <input type="text" name="address" placeholder="Enter delivery address" required style="width:300px;">
+    <button type="submit">Place Order</button>
+</form>
+    {% else %}
+        <p>Your cart is empty.</p>
+    {% endif %}
+</body>
+</html>

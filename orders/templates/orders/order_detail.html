@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head><title>Order Detail</title></head>
+<body>
+    <h1>Order #{{ order.id }}</h1>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color: green;">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <p>Status: {{ order.status }}</p>
+    <p>Address: {{ order.address }}</p>
+
+    <table border="1" cellpadding="8">
+        <tr><th>Product</th><th>Quantity</th><th>Price</th><th>Subtotal</th></tr>
+        {% for item in order.items.all %}
+        <tr>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>₹{{ item.price_at_purchase }}</td>
+            <td>₹{{ item.subtotal }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h3>Total: ₹{{ order.total_amount }}</h3>
+    <a href="{% url 'orders:order_list' %}">Back to My Orders</a>
+</body>
+</html>

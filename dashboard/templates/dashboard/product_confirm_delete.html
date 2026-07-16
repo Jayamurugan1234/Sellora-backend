@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head><title>Orders Containing My Products</title></head>
+<body>
+    <h1>Orders Containing My Products</h1>
+    {% if order_items %}
+    <table border="1" cellpadding="8">
+        <tr><th>Order #</th><th>Product</th><th>Quantity</th><th>Price</th><th>Subtotal</th><th>Order Status</th></tr>
+        {% for item in order_items %}
+        <tr>
+            <td>{{ item.order.id }}</td>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>₹{{ item.price_at_purchase }}</td>
+            <td>₹{{ item.subtotal }}</td>
+            <td>{{ item.order.status }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <p>No orders yet for your products.</p>
+    {% endif %}
+    <a href="{% url 'dashboard:product_list' %}">Back to My Products</a>
+</body>
+</html>
