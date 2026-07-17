@@ -30,9 +30,10 @@ SECRET_KEY = os.environ.get(
 # DEBUG = True
 
 DEBUG = os.environ.get("DJANGO_DEBUG", "True") == "True"
-ALLOWED_HOSTS = os.environ.get( 
+ALLOWED_HOSTS = os.environ.get(
     "DJANGO_ALLOWED_HOSTS",
-     "https://sellora-backend-zo54.onrender.com/", "localhost,127.0.0.1:8000" ).split(",")
+    "sellora-backend-zo54.onrender.com,localhost,127.0.0.1"
+).split(",")
 
 
 # Application definition
@@ -185,9 +186,8 @@ REST_FRAMEWORK = {
 
 # CORS - allow React dev server to call this API
 CORS_ALLOWED_ORIGINS = [
-    "https://selloraa.vercel.app/",
+    "https://selloraa.vercel.app",    
     "http://localhost:5173",
-    
 ]
 
 CORS_ALLOW_ALL_ORIGINS = False
