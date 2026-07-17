@@ -31,7 +31,8 @@ SECRET_KEY = os.environ.get(
 
 DEBUG = os.environ.get("DJANGO_DEBUG", "True") == "True"
 ALLOWED_HOSTS = os.environ.get( 
-    "DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1:8000" ).split(",")
+    "DJANGO_ALLOWED_HOSTS",
+     "https://sellora-backend-zo54.onrender.com/", "localhost,127.0.0.1:8000" ).split(",")
 
 
 # Application definition
@@ -162,8 +163,8 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.environ.get("vjayamurugan83@gmail.com")
-EMAIL_HOST_PASSWORD =os.environ.get( "pedwjvhhmztvccsu")
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "vjayamurugan83@gmail.com")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = "Sellora <vjayamurugan83@gmail.com>"
 
 
@@ -186,7 +187,7 @@ REST_FRAMEWORK = {
 CORS_ALLOWED_ORIGINS = [
     "https://selloraa.vercel.app/",
     "http://localhost:5173",
-    # "http://127.0.0.1:5173",
+    
 ]
 
 CORS_ALLOW_ALL_ORIGINS = False
@@ -199,6 +200,10 @@ CORS_ALLOW_HEADERS = [
     'x-requested-with',
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://sellora-backend-zo54.onrender.com",
+    "https://selloraa.vercel.app",
+]
 
 
 
